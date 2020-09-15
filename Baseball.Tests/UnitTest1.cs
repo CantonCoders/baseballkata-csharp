@@ -8,12 +8,13 @@ using FluentAssertions;
  * Let's create a program that will keep track of the score for us.
  * We'll need to create a constructor ScoreCard that has two public functions: addEntry and getScore.
  *  addEntry - Takes in the result of an at-bat. This result can be single, double, triple, homerun, or out.
- *  getScore - Returns the score in the format Home: [HOME_SCORE] Away: [AWAY_SCORE]
+ *  getScore - Returns the score in the format Home: [HOME_SCORE] Away: [AWAY_SCORE] except when the game is over the score card will append FINAL to the start. 
+ *  There are no ties in baseball.
+ *  
     To keep things simple, base runners will advance the amount of bases equal to that of the batter's hit 
         (i.e. if the batter hits a double, each base-runner will advance two bases)
     
-    A few important baseball rules:
-
+    A few important baseball rul
     1. The Away team bats first.
     2. There are three outs in an inning
     3. After three outs the opposing team hits.
@@ -30,6 +31,7 @@ namespace Baseball.Tests
         [Fact]
         public void Test1()
         {
+            Assert.True(false);
         }
     }
 }
