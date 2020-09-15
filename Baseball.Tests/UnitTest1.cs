@@ -8,7 +8,7 @@ using FluentAssertions;
  * Let's create a program that will keep track of the score for us.
  * We'll need to create a constructor ScoreCard that has two public functions: addEntry and getScore.
  *  addEntry - Takes in the result of an at-bat. This result can be single, double, triple, homerun, or out.
- *  getScore - Returns the score in the format Home: [HOME_SCORE] Away: [AWAY_SCORE]
+ *  getScore - Returns the score in the format Home: [HOME_SCORE] Away: [AWAY_SCORE] except when a game is completed after 9 innings FINAL will be pre-pending to the score.
     To keep things simple, base runners will advance the amount of bases equal to that of the batter's hit 
         (i.e. if the batter hits a double, each base-runner will advance two bases)
     
