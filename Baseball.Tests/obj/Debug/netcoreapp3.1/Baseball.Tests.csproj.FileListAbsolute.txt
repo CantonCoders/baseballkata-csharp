@@ -86,7 +86,6 @@ c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\bin\Debug\netcore
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.csprojAssemblyReference.cache
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.AssemblyInfoInputs.cache
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.AssemblyInfo.cs
 c:\Users\j\Documents\GitHub\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.csproj.CoreCompileInputs.cache
