@@ -196,3 +196,4 @@ C:\Users\Matthew\Source\Repos\baseballkata-csharp\Baseball.Tests\obj\Debug\netco
 C:\Users\Matthew\Source\Repos\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.dll
 C:\Users\Matthew\Source\Repos\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.pdb
 C:\Users\Matthew\Source\Repos\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.genruntimeconfig.cache
+C:\Users\Matthew\Source\Repos\baseballkata-csharp\Baseball.Tests\obj\Debug\netcoreapp3.1\Baseball.Tests.csprojAssemblyReference.cache

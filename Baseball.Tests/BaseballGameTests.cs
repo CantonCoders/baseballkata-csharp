@@ -9,7 +9,7 @@ using FluentAssertions;
  * We'll need to create a constructor ScoreCard that has two public functions: addEntry and getScore.
  *  addEntry - Takes in the result of an at-bat. This result can be single, double, triple, homerun, or out.
  *  getScore - Returns the score in the format Home: [HOME_SCORE] Away: [AWAY_SCORE] except 
- *  when a game is completed after 9 innings FINAL will be pre-pending to the score.
+ *  when a game is completed after 9 innings FINAL will be pre-pended to the score.
     To keep things simple, base runners will advance the amount of bases equal to that of the batter's hit 
         (i.e. if the batter hits a double, each base-runner will advance two bases)
     
@@ -28,21 +28,21 @@ namespace Baseball.Tests
     public class BaseballGameTests
     {
         [Fact]
-        public void test_givenStartOftheGame()
+        public void givenStartOftheGame()
         {
             BaseballGame game = new BaseballGame();
             game.ScoreCard.Should().Be("Home: 0 Away: 0");
         }
 
         [Fact]
-        public void test_firstBatterStrikesOut()
+        public void firstBatterStrikesOut()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(0);
             game.ScoreCard.Should().Be("Home: 0 Away: 0");
         }
         [Fact]
-        public void test_secondBatterHomeRun()
+        public void secondBatterHomeRun()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
@@ -50,7 +50,7 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void test_thirdBatterHomeRun()
+        public void thirdBatterHomeRun()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
@@ -59,7 +59,7 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void test_Away2Runs_Home1Out1Run()
+        public void Away2Runs_Home1Out1Run()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
@@ -76,7 +76,7 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void test_Away2Runs_Home1Out1Run4Doubles()
+        public void Away2Runs_Home1Out1Run4Doubles()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
@@ -96,7 +96,7 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void test_5singlesHomeTeam2AwayTeam0()
+        public void fiveSinglesHomeTeam2AwayTeam0()
         {
             BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.SINGLE);
