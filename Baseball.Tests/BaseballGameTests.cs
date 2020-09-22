@@ -27,24 +27,32 @@ namespace Baseball.Tests
 {
     public class BaseballGameTests
     {
-        [Fact]
-        public void givenStartOftheGame()
+        private BaseballGame game;
+        
+        public BaseballGameTests()
         {
-            BaseballGame game = new BaseballGame();
-            game.ScoreCard.Should().Be("Home: 0 Away: 0");
+            game = new BaseballGame();
+        }
+
+        private void AssertScore(int homeScore, int awayScore)
+        {
+            game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
+        }
+        [Fact]
+        public void GameStartsAtZeroZero()
+        {
+            AssertScore(0, 0);
         }
 
         [Fact]
         public void firstBatterStrikesOut()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(0);
             game.ScoreCard.Should().Be("Home: 0 Away: 0");
         }
         [Fact]
         public void secondBatterHomeRun()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
             game.ScoreCard.Should().Be("Home: 0 Away: 1");
         }
@@ -52,7 +60,6 @@ namespace Baseball.Tests
         [Fact]
         public void thirdBatterHomeRun()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
             game.AddEntry(BaseballGame.HOMERUN);
             game.ScoreCard.Should().Be("Home: 0 Away: 2");
@@ -61,7 +68,6 @@ namespace Baseball.Tests
         [Fact]
         public void Away2Runs_Home1Out1Run()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
             game.AddEntry(BaseballGame.HOMERUN);
             game.AddEntry(0);
@@ -78,7 +84,6 @@ namespace Baseball.Tests
         [Fact]
         public void Away2Runs_Home1Out1Run4Doubles()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.HOMERUN);
             game.AddEntry(BaseballGame.HOMERUN);
             game.AddEntry(0);
@@ -98,7 +103,6 @@ namespace Baseball.Tests
         [Fact]
         public void fiveSinglesHomeTeam2AwayTeam0()
         {
-            BaseballGame game = new BaseballGame();
             game.AddEntry(BaseballGame.SINGLE);
             game.AddEntry(BaseballGame.SINGLE);
             game.AddEntry(BaseballGame.SINGLE);
@@ -106,7 +110,5 @@ namespace Baseball.Tests
             game.AddEntry(BaseballGame.SINGLE);
             game.ScoreCard.Should().Be("Home: 0 Away: 2");
         }
-
-
     }
 }
