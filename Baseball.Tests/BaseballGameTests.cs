@@ -39,7 +39,7 @@ namespace Baseball.Tests
             game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
         }
 
-        private void Out(int numberOfOuts=1)
+        private void Out(int numberOfOuts = 1)
         {
             AddEntries(numberOfOuts, 0);
         }
@@ -47,6 +47,15 @@ namespace Baseball.Tests
         private void HomeRun(int numberOfHomeRuns = 1)
         {
             AddEntries(numberOfHomeRuns, 4);
+        }
+        private void DoubleHit(int numberOfDoubles = 1)
+        {
+            AddEntries(numberOfDoubles, 2);
+        }
+
+        private void SingleHit(int numberOfSingles = 1)
+        {
+            AddEntries(numberOfSingles, 1);
         }
 
         private void AddEntries(int numberOfEntries, int hit)
@@ -79,49 +88,32 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void Away2Runs_Home1Out1Run()
+        public void SwitchingScoringAfterThreeOuts()
         {
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(0);
-            game.AddEntry(0);
-            game.AddEntry(0);
+            HomeRun(2);
+            Out(4);
+            HomeRun();
 
-            game.AddEntry(0);
-            game.AddEntry(4);
-            
-            game.ScoreCard.Should().Be("Home: 1 Away: 2");
-
+            AssertScore(1, 2);
         }
 
         [Fact]
-        public void Away2Runs_Home1Out1Run4Doubles()
+        public void DoubleDrivesSecondBaserunnerHome()
         {
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(0);
-            game.AddEntry(0);
-            game.AddEntry(0);
+            HomeRun(2);
+            Out(4);
+            HomeRun();
+            DoubleHit(3);
 
-            game.AddEntry(0);
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(2);
-            game.AddEntry(2);
-            game.AddEntry(2);
-
-            game.ScoreCard.Should().Be("Home: 3 Away: 2");
-
+            AssertScore(3, 2);
         }
 
         [Fact]
-        public void fiveSinglesHomeTeam2AwayTeam0()
+        public void SinglesScore()
         {
-            game.AddEntry(BaseballGame.SINGLE);
-            game.AddEntry(BaseballGame.SINGLE);
-            game.AddEntry(BaseballGame.SINGLE);
-            game.AddEntry(BaseballGame.SINGLE);
-            game.AddEntry(BaseballGame.SINGLE);
-            game.ScoreCard.Should().Be("Home: 0 Away: 2");
+            SingleHit(5);
+
+            AssertScore(0, 2);
         }
     }
 }
