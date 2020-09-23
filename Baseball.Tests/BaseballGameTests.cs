@@ -39,9 +39,12 @@ namespace Baseball.Tests
             game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
         }
 
-        private void Out()
+        private void Out(int numberOfOuts=1)
         {
-            game.AddEntry(0);
+            for(var i=1;i<=numberOfOuts;i++)
+            {
+                game.AddEntry(0);
+            }
         }
         [Fact]
         public void GameStartsAtZeroZero()
@@ -50,9 +53,9 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void firstBatterStrikesOut()
+        public void GameEndsAtZeroZero()
         {
-            Out();
+            Out(54);
             AssertScore(0, 0);
         }
         [Fact]
