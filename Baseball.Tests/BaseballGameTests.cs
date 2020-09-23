@@ -41,16 +41,22 @@ namespace Baseball.Tests
 
         private void Out(int numberOfOuts=1)
         {
-            for(var i=1;i<=numberOfOuts;i++)
+            AddEntries(numberOfOuts, 0);
+        }
+
+        private void HomeRun(int numberOfHomeRuns = 1)
+        {
+            AddEntries(numberOfHomeRuns, 4);
+        }
+
+        private void AddEntries(int numberOfEntries, int hit)
+        {
+            for (var i = 1; i <= numberOfEntries; i++)
             {
-                game.AddEntry(0);
+                game.AddEntry(hit);
             }
         }
 
-        private void HomeRun()
-        {
-            game.AddEntry(4);
-        }
         [Fact]
         public void GameStartsAtZeroZero()
         {
@@ -68,14 +74,8 @@ namespace Baseball.Tests
         {
             HomeRun();
             AssertScore(0, 1);
-        }
-
-        [Fact]
-        public void thirdBatterHomeRun()
-        {
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.ScoreCard.Should().Be("Home: 0 Away: 2");
+            HomeRun();
+            AssertScore(0, 2);
         }
 
         [Fact]
