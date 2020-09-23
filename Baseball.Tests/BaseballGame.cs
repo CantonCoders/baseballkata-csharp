@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
 
 namespace Baseball.Tests
 {
@@ -47,24 +48,12 @@ namespace Baseball.Tests
         {
             switchInning();
 
-            if (atBat == SINGLE && this.IsFirstBaseLoaded 
-                           && this.IsSecondBaseLoaded
-                           && this.IsThirdBaseLoaded)
+
+
+            if (atBat == SINGLE)
             {
-                awayTeamScores();
-                    
-            }
-            else if (atBat == SINGLE && this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
-            {
-                IsThirdBaseLoaded = true;
-            }
-            else if (atBat == SINGLE && this.IsFirstBaseLoaded)
-            {
-                IsSecondBaseLoaded = true;
-            }
-            else if (atBat == SINGLE)
-            {
-                IsFirstBaseLoaded = true;
+                SingleHit(atBat);
+                return;
             }
 
 
@@ -89,6 +78,29 @@ namespace Baseball.Tests
                 countOuts++;
         }
 
+        private void SingleHit(int atBat)
+        {
+            if (this.IsFirstBaseLoaded
+                       && this.IsSecondBaseLoaded
+                       && this.IsThirdBaseLoaded)
+            {
+                awayTeamScores();
+
+            }
+            else if (atBat == SINGLE && this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
+            {
+                IsThirdBaseLoaded = true;
+            }
+            else if (atBat == SINGLE && this.IsFirstBaseLoaded)
+            {
+                IsSecondBaseLoaded = true;
+            }
+            else if (atBat == SINGLE)
+            {
+                IsFirstBaseLoaded = true;
+            }
+        }
+
         private void awayTeamScores()
         {
             awayRuns++;
@@ -105,9 +117,6 @@ namespace Baseball.Tests
                 isAwayTeamBatting = !isAwayTeamBatting;
         }
 
-        private bool isInningOver()
-        {
-            return countOuts == 3;
-        }
+        private bool isInningOver() => countOuts == 3;
     }
 }
