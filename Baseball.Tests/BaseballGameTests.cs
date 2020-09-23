@@ -46,6 +46,11 @@ namespace Baseball.Tests
                 game.AddEntry(0);
             }
         }
+
+        private void HomeRun()
+        {
+            game.AddEntry(4);
+        }
         [Fact]
         public void GameStartsAtZeroZero()
         {
@@ -59,10 +64,10 @@ namespace Baseball.Tests
             AssertScore(0, 0);
         }
         [Fact]
-        public void secondBatterHomeRun()
+        public void HomeRunWorthOneRun()
         {
-            game.AddEntry(BaseballGame.HOMERUN);
-            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+            HomeRun();
+            AssertScore(0, 1);
         }
 
         [Fact]
