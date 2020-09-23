@@ -48,6 +48,10 @@ namespace Baseball.Tests
         {
             AddEntries(numberOfHomeRuns, 4);
         }
+        private void TripleHit(int numberOfTriples = 1)
+        {
+            AddEntries(numberOfTriples, 3);
+        }
         private void DoubleHit(int numberOfDoubles = 1)
         {
             AddEntries(numberOfDoubles, 2);
@@ -115,5 +119,14 @@ namespace Baseball.Tests
 
             AssertScore(0, 2);
         }
+        [Fact]
+        public void TripleScores()
+        {
+            SingleHit();
+            TripleHit();
+
+            AssertScore(0, 1);
+        }
+
     }
 }

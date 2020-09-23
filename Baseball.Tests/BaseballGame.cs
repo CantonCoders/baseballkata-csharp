@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics.Tracing;
 
 namespace Baseball.Tests
@@ -6,9 +7,10 @@ namespace Baseball.Tests
     internal class BaseballGame
     {
         public const int HOMERUN = 4;
-        public const int OUT = 0;
+        public const int TRIPLE = 3;
         public const int DOUBLE = 2;
         public const int SINGLE = 1;
+        public const int OUT = 0;
 
         private bool IsThirdBaseLoaded
         {
@@ -46,16 +48,22 @@ namespace Baseball.Tests
 
         internal void AddEntry(int atBat)
         {
-            switchInning();
-
-
-
+            if(atBat == OUT)
+            {
+                countOuts++;
+                switchInning();
+                return;
+            }
             if (atBat == SINGLE)
             {
                 SingleHit();
                 return;
             }
-
+            if (atBat == TRIPLE)
+            {
+                TripleHit();
+                return;
+            }
 
             if (atBat == DOUBLE)
             {
@@ -68,7 +76,6 @@ namespace Baseball.Tests
                 HomeRun();
                 return;
             }
-            countOuts++;
         }
 
         private void HomeRun()
@@ -77,6 +84,12 @@ namespace Baseball.Tests
                 awayTeamScores();
             else
                 homeTeamScores();
+        }
+        private void TripleHit()
+        {
+            SingleHit();
+            SingleHit();
+            SingleHit();
         }
 
         private void DoubleHit()
@@ -94,7 +107,7 @@ namespace Baseball.Tests
                        && this.IsSecondBaseLoaded
                        && this.IsThirdBaseLoaded)
             {
-                awayTeamScores();
+                AtBatTeamScores();
 
             }
             else if (this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
@@ -106,6 +119,18 @@ namespace Baseball.Tests
                 IsSecondBaseLoaded = true;
             }
             IsFirstBaseLoaded = true;
+        }
+
+        private void AtBatTeamScores()
+        {
+            if (isAwayTeamBatting)
+            {
+                awayTeamScores();
+            }
+            else
+            {
+                homeTeamScores();
+            }
         }
 
         private void awayTeamScores()
@@ -121,9 +146,12 @@ namespace Baseball.Tests
         private void switchInning()
         {
             if (isInningOver())
+            {
+                countOuts = 0;
                 isAwayTeamBatting = !isAwayTeamBatting;
+            }
         }
 
-        private bool isInningOver() => countOuts == 3;
+        private bool isInningOver() => countOuts >= 3;
     }
 }
