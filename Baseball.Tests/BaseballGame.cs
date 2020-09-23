@@ -52,7 +52,7 @@ namespace Baseball.Tests
 
             if (atBat == SINGLE)
             {
-                SingleHit(atBat);
+                SingleHit();
                 return;
             }
 
@@ -84,7 +84,7 @@ namespace Baseball.Tests
             IsSecondBaseLoaded = true;
         }
 
-        private void SingleHit(int atBat)
+        private void SingleHit()
         {
             if (this.IsFirstBaseLoaded
                        && this.IsSecondBaseLoaded
@@ -93,18 +93,15 @@ namespace Baseball.Tests
                 awayTeamScores();
 
             }
-            else if (atBat == SINGLE && this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
+            else if (this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
             {
                 IsThirdBaseLoaded = true;
             }
-            else if (atBat == SINGLE && this.IsFirstBaseLoaded)
+            else if (this.IsFirstBaseLoaded)
             {
                 IsSecondBaseLoaded = true;
             }
-            else if (atBat == SINGLE)
-            {
-                IsFirstBaseLoaded = true;
-            }
+            IsFirstBaseLoaded = true;
         }
 
         private void awayTeamScores()
