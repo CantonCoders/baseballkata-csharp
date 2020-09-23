@@ -38,6 +38,11 @@ namespace Baseball.Tests
         {
             game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
         }
+
+        private void Out()
+        {
+            game.AddEntry(0);
+        }
         [Fact]
         public void GameStartsAtZeroZero()
         {
@@ -47,8 +52,8 @@ namespace Baseball.Tests
         [Fact]
         public void firstBatterStrikesOut()
         {
-            game.AddEntry(0);
-            game.ScoreCard.Should().Be("Home: 0 Away: 0");
+            Out();
+            AssertScore(0, 0);
         }
         [Fact]
         public void secondBatterHomeRun()
