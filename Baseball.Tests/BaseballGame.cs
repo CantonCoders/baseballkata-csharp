@@ -107,7 +107,7 @@ namespace Baseball.Tests
 
         private bool isInningOver()
         {
-            return countOuts % 3 == 0 && countOuts != 0;
+            return countOuts == 3;
         }
     }
 }
