@@ -57,14 +57,11 @@ namespace Baseball.Tests
             }
 
 
-            if (atBat == DOUBLE && this.IsSecondBaseLoaded)
+            if (atBat == DOUBLE)
             {
-                IsSecondBaseLoaded = true;
-                homeTeamScores();
-            }
-            else if (atBat == DOUBLE)
-            {
-                IsSecondBaseLoaded = true;
+                DoubleHit();
+
+                return;
             }
 
             if (atBat == HOMERUN)
@@ -76,6 +73,15 @@ namespace Baseball.Tests
             }
             else if (atBat == OUT)
                 countOuts++;
+        }
+
+        private void DoubleHit()
+        {
+            if (this.IsSecondBaseLoaded)
+            {
+                homeTeamScores();
+            }
+            IsSecondBaseLoaded = true;
         }
 
         private void SingleHit(int atBat)
