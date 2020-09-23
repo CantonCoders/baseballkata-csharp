@@ -60,19 +60,23 @@ namespace Baseball.Tests
             if (atBat == DOUBLE)
             {
                 DoubleHit();
-
                 return;
             }
 
             if (atBat == HOMERUN)
             {
-                if (isAwayTeamBatting)
-                    awayTeamScores();
-                else
-                    homeTeamScores();
+                HomeRun();
+                return;
             }
-            else if (atBat == OUT)
-                countOuts++;
+            countOuts++;
+        }
+
+        private void HomeRun()
+        {
+            if (isAwayTeamBatting)
+                awayTeamScores();
+            else
+                homeTeamScores();
         }
 
         private void DoubleHit()
