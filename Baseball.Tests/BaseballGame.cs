@@ -6,152 +6,94 @@ namespace Baseball.Tests
 {
     internal class BaseballGame
     {
-        public const int HOMERUN = 4;
-        public const int TRIPLE = 3;
-        public const int DOUBLE = 2;
-        public const int SINGLE = 1;
-        public const int OUT = 0;
-
-        private bool IsThirdBaseLoaded
+        public enum AtBatResult
         {
-            get { return this.bases[3]; }
-            set { this.bases[3] = value; }
+            HOMERUN = 4,
+            TRIPLE = 3,
+            DOUBLE = 2,
+            SINGLE = 1,
+            OUT = 0
         }
 
-        private bool IsSecondBaseLoaded { 
-            get { return this.bases[2]; } 
-            set { this.bases[2] = value; } 
-        }
+        private Diamond diamond = new Diamond();
+        private Team homeTeam = new Team();
+        private Team awayTeam = new Team();
+        private Inning inning;
 
-        private bool IsFirstBaseLoaded
-        {
-            get { return this.bases[SINGLE]; }
-            set { this.bases[SINGLE] = value; }
-        }
-
-        private int awayRuns = 0;
-        private int homeTeamRuns = 0;
-        private int countOuts = 0;
-
-        private bool isAwayTeamBatting = true;
-        private bool[] bases = new bool[4];
 
         public BaseballGame()
         {
-
+            inning = new Inning(homeTeam, awayTeam);
         }
 
         public string ScoreCard
         {
-            get { return $"Home: {homeTeamRuns} Away: {awayRuns}"; }
+            get { return $"Home: {homeTeam.Score} Away: {awayTeam.Score}"; }
         }
 
-        internal void AddEntry(int atBat)
+        public void AddEntry(AtBatResult atBat)
         {
-            if(atBat == OUT)
+            if (atBat == AtBatResult.OUT)
             {
-                countOuts++;
-                switchInning();
+                inning.AddOut();
                 return;
             }
-            if (atBat == SINGLE)
+            if (atBat == AtBatResult.SINGLE)
             {
-                SingleHit();
+                if (this.diamond.AreBasesLoaded())
+                {
+                    inning.AddRun();
+
+                }
+                else if (this.diamond.IsFirstBaseLoaded && this.diamond.IsSecondBaseLoaded)
+                {
+                    diamond.IsThirdBaseLoaded = true;
+                }
+                else if (this.diamond.IsFirstBaseLoaded)
+                {
+                    diamond.IsSecondBaseLoaded = true;
+                }
+                diamond.IsFirstBaseLoaded = true;
                 return;
             }
-            if (atBat == TRIPLE)
+
+            if (atBat == AtBatResult.HOMERUN)
             {
-                TripleHit();
+                inning.AddRun();
+            }
+
+            if (atBat == AtBatResult.DOUBLE)
+            {
+                if (this.diamond.IsSecondBaseLoaded)
+                {
+                    inning.AddRun();
+                }
+                diamond.IsSecondBaseLoaded = true;
                 return;
             }
 
-            if (atBat == DOUBLE)
+            if (atBat == AtBatResult.TRIPLE)
             {
-                DoubleHit();
+                if (this.diamond.IsFirstBaseLoaded)
+                {
+                    inning.AddRun();
+                }
+
+                if (this.diamond.IsSecondBaseLoaded)
+                {
+                    inning.AddRun();
+                }
+                if (this.diamond.IsThirdBaseLoaded)
+                {
+                    inning.AddRun();
+                }
+                else if (!this.diamond.IsThirdBaseLoaded)
+                {
+                    this.diamond.IsThirdBaseLoaded = true;
+                }
                 return;
             }
-
-            if (atBat == HOMERUN)
-            {
-                HomeRun();
-                return;
-            }
         }
-
-        private void HomeRun()
-        {
-            if (isAwayTeamBatting)
-                awayTeamScores();
-            else
-                homeTeamScores();
-        }
-        private void TripleHit()
-        {
-            SingleHit();
-            SingleHit();
-            SingleHit();
-        }
-
-        private void DoubleHit()
-        {
-            if (this.IsSecondBaseLoaded)
-            {
-                homeTeamScores();
-            }
-            IsSecondBaseLoaded = true;
-        }
-
-        private void SingleHit()
-        {
-            if (this.IsFirstBaseLoaded
-                       && this.IsSecondBaseLoaded
-                       && this.IsThirdBaseLoaded)
-            {
-                AtBatTeamScores();
-
-            }
-            else if (this.IsFirstBaseLoaded && this.IsSecondBaseLoaded)
-            {
-                IsThirdBaseLoaded = true;
-            }
-            else if (this.IsFirstBaseLoaded)
-            {
-                IsSecondBaseLoaded = true;
-            }
-            IsFirstBaseLoaded = true;
-        }
-
-        private void AtBatTeamScores()
-        {
-            if (isAwayTeamBatting)
-            {
-                awayTeamScores();
-            }
-            else
-            {
-                homeTeamScores();
-            }
-        }
-
-        private void awayTeamScores()
-        {
-            awayRuns++;
-        }
-
-        private void homeTeamScores()
-        {
-            this.homeTeamRuns++;
-        }
-
-        private void switchInning()
-        {
-            if (isInningOver())
-            {
-                countOuts = 0;
-                isAwayTeamBatting = !isAwayTeamBatting;
-            }
-        }
-
-        private bool isInningOver() => countOuts >= 3;
+  
     }
 }

@@ -39,36 +39,10 @@ namespace Baseball.Tests
             game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
         }
 
-        private void Out(int numberOfOuts = 1)
-        {
-            AddEntries(numberOfOuts, 0);
-        }
+   
 
-        private void HomeRun(int numberOfHomeRuns = 1)
-        {
-            AddEntries(numberOfHomeRuns, 4);
-        }
-        private void TripleHit(int numberOfTriples = 1)
-        {
-            AddEntries(numberOfTriples, 3);
-        }
-        private void DoubleHit(int numberOfDoubles = 1)
-        {
-            AddEntries(numberOfDoubles, 2);
-        }
 
-        private void SingleHit(int numberOfSingles = 1)
-        {
-            AddEntries(numberOfSingles, 1);
-        }
 
-        private void AddEntries(int numberOfEntries, int hit)
-        {
-            for (var i = 1; i <= numberOfEntries; i++)
-            {
-                game.AddEntry(hit);
-            }
-        }
 
         [Fact]
         public void GameStartsAtZeroZero()
@@ -77,26 +51,97 @@ namespace Baseball.Tests
         }
 
         [Fact]
-        public void GameEndsAtZeroZero()
+        public void Test_WhenGameStartsHomeZeroAwayZero()
         {
-            Out(54);
-            AssertScore(0, 0);
+            BaseballGame game = new BaseballGame();
+            game.ScoreCard.Should().Be("Home: 0 Away: 0");
         }
+        [Fact]
+        public void Test_FourSingles()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+
+        }
+
+        [Fact]
+        public void Test_2DoublesHomeOneAwayZero()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+          
+            game.ScoreCard.Should().Be("Home: 1 Away: 0");
+
+        }
+
+        [Fact]
+        public void Test_2DoublesHomeZeroAwayOne()
+        {
+            BaseballGame game = new BaseballGame();
+        
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+
+        }
+
+        [Fact]
+        public void Test_2TriplesHomeZeroAwayOne()
+        {
+            BaseballGame game = new BaseballGame();
+
+            game.AddEntry(BaseballGame.AtBatResult.TRIPLE);
+            game.AddEntry(BaseballGame.AtBatResult.TRIPLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+
+        }
+
+        [Fact]
+        public void Test_HomeRunHomeZeroAway1()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+
+        }
+
+
+
         [Fact]
         public void HomeRunWorthOneRun()
         {
-            HomeRun();
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
             AssertScore(0, 1);
-            HomeRun();
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
             AssertScore(0, 2);
         }
 
         [Fact]
         public void SwitchingScoringAfterThreeOuts()
         {
-            HomeRun(2);
-            Out(4);
-            HomeRun();
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+
+
+
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
 
             AssertScore(1, 2);
         }
@@ -104,10 +149,19 @@ namespace Baseball.Tests
         [Fact]
         public void DoubleDrivesSecondBaserunnerHome()
         {
-            HomeRun(2);
-            Out(4);
-            HomeRun();
-            DoubleHit(3);
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+            game.AddEntry(BaseballGame.AtBatResult.OUT);
+
+            game.AddEntry(BaseballGame.AtBatResult.HOMERUN);
+
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
 
             AssertScore(3, 2);
         }
@@ -115,18 +169,73 @@ namespace Baseball.Tests
         [Fact]
         public void SinglesScore()
         {
-            SingleHit(5);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+
 
             AssertScore(0, 2);
         }
         [Fact]
-        public void TripleScores()
+        public void Test_SingleTripleHomeZeroAway1()
         {
-            SingleHit();
-            TripleHit();
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.TRIPLE);
 
-            AssertScore(0, 1);
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
         }
+
+        [Fact]
+        public void Test_2SinglesTripleHomeZeroAway2()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.TRIPLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 2");
+        }
+
+        [Fact]
+        public void Test_3SinglesTripleHomeZeroAway3()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+
+            game.AddEntry(BaseballGame.AtBatResult.TRIPLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 3");
+        }
+
+        [Fact]
+        public void Test_2SinglesOneDoubleHomeZeroAway1()
+        {
+            BaseballGame game = new BaseballGame();
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.SINGLE);
+            game.AddEntry(BaseballGame.AtBatResult.DOUBLE);
+
+            game.ScoreCard.Should().Be("Home: 0 Away: 1");
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\j\\Documents\\GitHub\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj": {}
+    "C:\\Users\\j\\Documents\\GitHub\\sunday\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\j\\Documents\\GitHub\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj": {
+    "C:\\Users\\j\\Documents\\GitHub\\sunday\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\j\\Documents\\GitHub\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\j\\Documents\\GitHub\\sunday\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj",
         "projectName": "Baseball.Tests",
-        "projectPath": "C:\\Users\\j\\Documents\\GitHub\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj",
+        "projectPath": "C:\\Users\\j\\Documents\\GitHub\\sunday\\baseballkata-csharp\\Baseball.Tests\\Baseball.Tests.csproj",
         "packagesPath": "C:\\Users\\j\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\j\\Documents\\GitHub\\baseballkata-csharp\\Baseball.Tests\\obj\\",
+        "outputPath": "C:\\Users\\j\\Documents\\GitHub\\sunday\\baseballkata-csharp\\Baseball.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\j\\AppData\\Roaming\\NuGet\\NuGet.Config",
