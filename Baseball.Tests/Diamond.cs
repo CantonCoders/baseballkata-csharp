@@ -36,20 +36,7 @@ namespace Baseball.Tests
         {
             if (atBat == AtBatResult.SINGLE)
             {
-                if (AreBasesLoaded())
-                {
-                    inning.AddRun();
-
-                }
-                else if (IsFirstBaseLoaded && IsSecondBaseLoaded)
-                {
-                    IsThirdBaseLoaded = true;
-                }
-                else if (IsFirstBaseLoaded)
-                {
-                    IsSecondBaseLoaded = true;
-                }
-                IsFirstBaseLoaded = true;
+                RunOneBase();
                 return;
             }
 
@@ -70,25 +57,46 @@ namespace Baseball.Tests
 
             if (atBat == AtBatResult.TRIPLE)
             {
-                if (IsFirstBaseLoaded)
-                {
-                    inning.AddRun();
-                }
-
-                if (IsSecondBaseLoaded)
-                {
-                    inning.AddRun();
-                }
-                if (IsThirdBaseLoaded)
-                {
-                    inning.AddRun();
-                }
-                else if (!IsThirdBaseLoaded)
-                {
-                    IsThirdBaseLoaded = true;
-                }
+                RunTriple();
                 return;
             }
+        }
+
+        private void RunTriple()
+        {
+            if (IsFirstBaseLoaded)
+            {
+                inning.AddRun();
+            }
+            if (IsSecondBaseLoaded)
+            {
+                inning.AddRun();
+            }
+            if (IsThirdBaseLoaded)
+            {
+                inning.AddRun();
+            }
+            else if (!IsThirdBaseLoaded)
+            {
+                IsThirdBaseLoaded = true;
+            }
+        }
+
+        private void RunOneBase()
+        {
+            if (AreBasesLoaded())
+            {
+                inning.AddRun();
+            }
+            else if (IsFirstBaseLoaded && IsSecondBaseLoaded)
+            {
+                IsThirdBaseLoaded = true;
+            }
+            else if (IsFirstBaseLoaded)
+            {
+                IsSecondBaseLoaded = true;
+            }
+            IsFirstBaseLoaded = true;
         }
 
         public Diamond(ScoreBoard inning)
