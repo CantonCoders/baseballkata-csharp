@@ -84,25 +84,18 @@ namespace Baseball.Tests
         
         private void RunToFirst()
         {
-            if (AreBasesLoaded())
-            {
-                inning.AddRun();
-                return;
-            }
             if (IsFirstBaseLoaded)
             {
                 RunToSecond();
-                IsFirstBaseLoaded = true;
-                return;
-            }
-            else if (IsFirstBaseLoaded && IsSecondBaseLoaded)
-            {
-                IsThirdBaseLoaded = true;
             }
             IsFirstBaseLoaded = true;
         }
         private void RunToThird()
         {
+            if (IsThirdBaseLoaded)
+            {
+                inning.AddRun();
+            }
             IsThirdBaseLoaded = true;
         }
         private void RunToSecond()
