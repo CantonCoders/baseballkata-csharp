@@ -1,15 +1,14 @@
 ﻿namespace Baseball.Tests
 {
-    internal class Inning
+    internal class ScoreBoard
     {
         private Team homeTeam;
         private Team awayTeam;
-        public Inning(Team homeTeam, Team awayTeam)
+        public ScoreBoard()
         {
-            this.homeTeam = homeTeam;
-            this.awayTeam = awayTeam;
+            this.homeTeam = new Team();
+            this.awayTeam = new Team();
             AtBatTeam = awayTeam;
-
         }
 
         internal void AddOut()
@@ -31,7 +30,10 @@
         {
             AtBatTeam = awayTeam == AtBatTeam ? homeTeam : awayTeam;
         }
-
+        public string GetScore()
+        {
+            return $"Home: {homeTeam.Score} Away: {awayTeam.Score}";
+        }
         public void AddRun()
         {
             AtBatTeam.AddRun();
