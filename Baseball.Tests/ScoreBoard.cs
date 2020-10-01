@@ -2,12 +2,12 @@
 {
     internal class ScoreBoard
     {
-        private Team homeTeam;
-        private Team awayTeam;
+        private Score homeTeam;
+        private Score awayTeam;
         public ScoreBoard()
         {
-            this.homeTeam = new Team();
-            this.awayTeam = new Team();
+            this.homeTeam = new Score();
+            this.awayTeam = new Score();
             AtBatTeam = awayTeam;
         }
 
@@ -32,7 +32,7 @@
         }
         public string GetScore()
         {
-            return $"Home: {homeTeam.Score} Away: {awayTeam.Score}";
+            return $"Home: {homeTeam.Runs} Away: {awayTeam.Runs}";
         }
         public void AddRun()
         {
@@ -41,6 +41,6 @@
         public bool IsInningOver() => OutCount >= 3;
 
         public int OutCount { get; internal set; }
-        public Team AtBatTeam { get; internal set; }
+        public Score AtBatTeam { get; internal set; }
     }
 }

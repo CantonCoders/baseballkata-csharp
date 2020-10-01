@@ -7,26 +7,24 @@ namespace Baseball.Tests
     internal partial class BaseballGame
     {
         private Diamond diamond;
-        private ScoreBoard inning;
+        private ScoreBoard scoreBoard;
 
         public BaseballGame()
         {
-            inning = new ScoreBoard();
-            diamond = new Diamond(inning);
+            scoreBoard = new ScoreBoard();
+            diamond = new Diamond(scoreBoard);
         }
 
         public string ScoreCard
         {
-            get { return inning.GetScore(); }
+            get { return scoreBoard.GetScore(); }
         }
-
-
 
         public void AddEntry(AtBatResult atBat)
         {
             if (atBat == AtBatResult.OUT)
             {
-                inning.AddOut();
+                scoreBoard.AddOut();
                 return;
             }
 
