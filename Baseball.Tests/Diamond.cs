@@ -36,7 +36,7 @@ namespace Baseball.Tests
         {
             if (atBat == AtBatResult.SINGLE)
             {
-                RunOneBase();
+                RunToFirst();
                 return;
             }
 
@@ -81,24 +81,38 @@ namespace Baseball.Tests
                 IsThirdBaseLoaded = true;
             }
         }
-
-        private void RunOneBase()
+        
+        private void RunToFirst()
         {
             if (AreBasesLoaded())
             {
                 inning.AddRun();
+                return;
+            }
+            if (IsFirstBaseLoaded)
+            {
+                RunToSecond();
+                IsFirstBaseLoaded = true;
+                return;
             }
             else if (IsFirstBaseLoaded && IsSecondBaseLoaded)
             {
                 IsThirdBaseLoaded = true;
             }
-            else if (IsFirstBaseLoaded)
-            {
-                IsSecondBaseLoaded = true;
-            }
             IsFirstBaseLoaded = true;
         }
-
+        private void RunToThird()
+        {
+            IsThirdBaseLoaded = true;
+        }
+        private void RunToSecond()
+        {
+            if(IsSecondBaseLoaded)
+            {
+                RunToThird();
+            }
+            IsSecondBaseLoaded = true;
+        }
         public Diamond(ScoreBoard inning)
         {
             for (int i = 0; i < 4; i++)
