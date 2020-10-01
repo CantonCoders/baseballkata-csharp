@@ -39,11 +39,15 @@ namespace Baseball.Tests
             game.ScoreCard.Should().Be($"Home: {homeScore} Away: {awayScore}");
         }
 
-   
+        
+        public void HomeRunDrivesSecondAndThirdIn()
+        {
+            game.AddEntry(AtBatResult.TRIPLE);
+            game.AddEntry(AtBatResult.DOUBLE);
+            game.AddEntry(AtBatResult.HOMERUN);
 
-
-
-
+            AssertScore(0, 3);
+        }
         [Fact]
         public void GameStartsAtZeroZero()
         {
