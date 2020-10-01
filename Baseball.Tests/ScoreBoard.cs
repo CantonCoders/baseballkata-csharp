@@ -16,7 +16,6 @@
             OutCount++;
             if (IsInningOver())
             {
-                ResetOutCount();
                 switchAtBatTeams();
             }
         }
@@ -29,6 +28,7 @@
         private void switchAtBatTeams()
         {
             AtBatTeam = awayTeam == AtBatTeam ? homeTeam : awayTeam;
+            ResetOutCount();
         }
         public string GetScore()
         {
